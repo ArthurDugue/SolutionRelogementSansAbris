@@ -24,26 +24,18 @@ st.markdown("""
 # Stockage de la data
 @st.cache_data
 def load_data():
-    finance = pd.read_excel(
-        "C:/LeWagon/SolutionRelogementSansAbris/finances_publiques_mel.xlsx",
-        sheet_name="finances_2024"
-    )
-
-    finance_prev = pd.read_excel(
-        "C:/LeWagon/SolutionRelogementSansAbris/finances_mel_5ans.xlsx",
-        sheet_name="finances_mel_5ans"
-    )
-
-    dvf = pd.read_excel(
-        "C:/LeWagon/SolutionRelogementSansAbris/DVF_MEL.xlsx",
-        sheet_name="DVF_MEL"
-    )
-
-    repartition = pd.read_csv("C:/LeWagon/SolutionRelogementSansAbris/RepartitionSansAbris_MEL.csv")
-
-    logements_vacants = pd.read_excel("C:/LeWagon/SolutionRelogementSansAbris/LogementsVacants_MEL_Exploitable.xlsx", 
-                                      sheet_name="LogementsVacants_MEL_Exploitabl")
+    # On utilise des chemins relatifs au dossier de l'app
+    finance = pd.read_excel("dataset_bi/finances_publiques_mel.xlsx", sheet_name="finances_2024")
     
+    finance_prev = pd.read_excel("dataset_bi/finances_mel_5ans.xlsx", sheet_name="finances_mel_5ans")
+    
+    dvf = pd.read_excel("dataset_bi/DVF_MEL.xlsx", sheet_name="DVF_MEL")
+    
+    # Pour les CSV, assure-toi qu'ils sont aussi dans le dépôt
+    repartition = pd.read_csv("dataset_bi/RepartitionSansAbris_MEL.csv")
+    logements_vacants = pd.read_excel("dataset_bi/LogementsVacants_MEL_Exploitable.xlsx",
+                                    sheet_name ="LogementsVacants_MEL_Exploitabl")
+
     return finance, finance_prev, dvf, repartition, logements_vacants
 
 finance, finance_prev, dvf, repartition, logements_vacants = load_data()
