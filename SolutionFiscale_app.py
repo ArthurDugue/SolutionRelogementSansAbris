@@ -6,20 +6,25 @@ import plotly.graph_objects as go
 
 # Les labels s'affichaient mal donc il a fallu une touche beauté en CSS
 st.markdown("""
-<style>
-[data-testid="stMetricValue"] {
-    font-size: 20px;
-}
+        <style>
+        [data-testid="stMetricValue"] {
+        font-size: 20px;
+        }
 
-[data-testid="stMetricLabel"] {
-    font-size: 22px;
-}
+        [data-testid="stMetricLabel"] {
+        font-size: 22px;
+        }
             
-[data-testid="stHeaderLabel"]{
-    font-size: 30px;
-}
-</style>
-""", unsafe_allow_html=True)
+        [data-testid="stHeaderLabel"]{
+        font-size: 25px;
+        }
+            
+        [data-testid="stContainer"] {
+        border: 10px solid #F79A7E;
+        border-radius: 10px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
 # Stockage de la data
 @st.cache_data
@@ -89,10 +94,10 @@ else:
 col1, col2 = st.columns(2, border=True)
 
 with col1:
-    with st.form("simulation"):
+    with st.form("simulation", border = False):
         tx_fiscale = st.slider("Taux fiscal", 0.0, 10.0, step=.1)
         prct_inv_log = st.slider("Pourcentage d'investissement", 0.0, 15.0, step=.1)
-        submit = st.form_submit_button("Simuler")
+        submit = st.form_submit_button("Simuler", type = "primary")
 
 # Gain fiscal + Cout investi 
 with col2:
@@ -116,7 +121,7 @@ with col2:
 # ------------- SLIDERS --------------
 
 # Valeurs fiscales en st.metrics
-with st.container(horizontal=True):
+with st.container(horizontal=True, border = True):
 
     recettes_actuelles = finance_filtered["recettes_fiscales"].sum()
 
@@ -186,7 +191,7 @@ annees = range(2027,2032)
 
 # Metric investissement
 st.header("Investissement par année", width = "stretch")
-with st.container(horizontal=True):
+with st.container(horizontal=True, border = True):
     cols = st.columns(5)
     for i, annee in enumerate(annees):
 
@@ -210,7 +215,7 @@ with st.container(horizontal=True):
                 
 # Metric logements réhabilités        
 st.header("Nombre prévisionnel de logements réhabilités", width ="stretch")
-with st.container(horizontal=True):
+with st.container(horizontal=True, border = True):
     cols = st.columns(5)
     for i, annee in enumerate(annees):
 
@@ -296,5 +301,5 @@ if commune == "":
         hovermode="x unified"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, theme="streamlit")
 # !Relogement des sans-abris
