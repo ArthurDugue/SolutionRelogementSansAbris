@@ -91,7 +91,7 @@ col1, col2 = st.columns(2, border=True)
 with col1:
     with st.form("simulation"):
         tx_fiscale = st.slider("Taux fiscal", 0.0, 10.0, step=.1)
-        prct_inv_log = st.slider("Pourcentage d'investissement", 0.0, 50.0, step=.5)
+        prct_inv_log = st.slider("Pourcentage d'investissement", 0.0, 15.0, step=.1)
         submit = st.form_submit_button("Simuler")
 
 # Gain fiscal + Cout investi 
